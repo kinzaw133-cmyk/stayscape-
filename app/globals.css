@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Three themes. Colors are RGB channels so Tailwind opacity modifiers work. */
+:root,
+[data-theme="forest"] {
+  --bg: 11 61 46; --surface: 15 74 56; --fg: 248 246 238; --muted: 201 214 203;
+  --accent: 212 175 55; --accent-fg: 11 61 46; --sage: 107 143 113;
+}
+[data-theme="ivory"] {
+  --bg: 248 246 238; --surface: 255 255 255; --fg: 11 61 46; --muted: 77 102 87;
+  --accent: 184 149 42; --accent-fg: 248 246 238; --sage: 107 143 113;
+}
+[data-theme="midnight"] {
+  --bg: 7 20 15; --surface: 12 31 24; --fg: 243 239 224; --muted: 169 183 174;
+  --accent: 226 193 88; --accent-fg: 7 20 15; --sage: 127 161 134;
+}
+
+@layer components {
+  .glass {
+    background: rgb(var(--fg) / 0.08);
+    border: 1px solid rgb(var(--fg) / 0.16);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 12px 40px rgb(0 0 0 / 0.18);
+  }
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-fg transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-50;
+  }
+  .field {
+    @apply w-full rounded-xl border border-fg/15 bg-transparent px-3 py-2.5 text-sm text-fg placeholder:text-muted focus:border-accent focus:outline-none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
